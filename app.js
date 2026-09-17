@@ -187,6 +187,14 @@ function showScreen(name) {
   $$('.screen').forEach((screen) => screen.classList.toggle('active', screen.dataset.screen === name));
   state.screen = name;
   $('#restartTop').classList.toggle('hidden', ['intro', 'profile'].includes(name));
+  $('#stageNav').classList.toggle('hidden', name === 'intro');
+  const stage = ({ briefing: 'profile', ending: 'dossier' })[name] || name;
+  $$('#stageNav li').forEach(item => {
+    const current = item.dataset.stage === stage;
+    item.classList.toggle('current', current);
+    if (current) item.setAttribute('aria-current', 'step');
+    else item.removeAttribute('aria-current');
+  });
   window.scrollTo({ top: 0, behavior: 'smooth' });
   document.title = `${name === 'intro' ? '零信任' : screenTitle(name)}｜AI 資安劇本殺`;
 }
@@ -213,9 +221,9 @@ function beep(freq = 520, duration = .05) {
 
 function renderSuspects() {
   $('#suspectGrid').innerHTML = suspects.map((suspect, index) => `
-    <button class="suspect-card" type="button" data-suspect="${suspect.id}" style="--accent:${['#ff87cb','#60baff','#ffd36d','#a77cff'][index]}">
-      <span class="suspect-number"><b>SUBJECT_0${index + 1}</b><span>● ONLINE</span></span>
-      <span class="avatar ${suspect.className}"><span>${suspect.initials}</span></span>
+    <button class="suspect-card" type="button" data-suspect="${suspect.id}" style="--accent:${['#c46650','#497a96','#497b60','#837094'][index]}">
+      <span class="suspect-number"><b>檔案 0${index + 1}</b><span>待調查</span></span>
+      <span class="avatar ${suspect.className}" role="img" aria-label="${suspect.name} 的動畫肖像"></span>
       <h3>${suspect.name}</h3>
       <p class="role">${suspect.role}</p>
       <p class="quote">「${suspect.quote}」</p>
@@ -229,7 +237,7 @@ function openSuspect(id) {
   const suspect = suspects.find(item => item.id === id);
   $('#dialogContent').innerHTML = `
     <article class="dialog-profile">
-      <div class="avatar ${suspect.className}"><span>${suspect.initials}</span></div>
+      <div class="avatar ${suspect.className}" role="img" aria-label="${suspect.name} 的動畫肖像"></div>
       <h3>${suspect.name}</h3>
       <span class="role">${suspect.role}</span>
       <dl>
@@ -307,7 +315,7 @@ function renderDossier() {
   $('#voteList').innerHTML = suspects.map(suspect => `
     <label class="vote-option">
       <input type="radio" name="vote" value="${suspect.id}" />
-      <span><span class="avatar ${suspect.className}"><span>${suspect.initials}</span></span><span><b>${suspect.name}</b><small>${suspect.role}</small></span></span>
+      <span><span class="avatar ${suspect.className}" aria-hidden="true"></span><span class="vote-person"><b>${suspect.name}</b><small>${suspect.role}</small></span><span class="vote-check" aria-hidden="true">✓</span></span>
     </label>`).join('');
   $$('input[name="vote"]').forEach(input => input.addEventListener('change', () => {
     state.vote = input.value;

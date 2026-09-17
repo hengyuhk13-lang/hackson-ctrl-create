@@ -3,17 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0B1020" />
+    <meta name="theme-color" content="#faf7ef" />
     <meta name="description" content="一局真正能玩的 AI 資安劇本殺 × 狼人殺，從生活化事件學會安全使用 AI 工具。" />
     <title>零信任：AI 資安劇本殺</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./campus.css" />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
     <header class="topbar">
       <a class="brand" href="#" aria-label="回到遊戲首頁">
-        <span class="brand-mark">Z</span>
-        <span>ZERO TRUST<span class="brand-cn">／零信任</span></span>
+        <span class="brand-mark">Z.</span>
+        <span>零信任<span class="brand-cn">校園推理俱樂部</span></span>
       </a>
       <div class="top-actions">
         <button id="soundToggle" class="icon-button" type="button" aria-pressed="false" title="切換音效">
@@ -24,13 +24,17 @@
       </div>
     </header>
 
+    <nav id="stageNav" class="stage-nav hidden" aria-label="遊戲進度">
+      <ol><li data-stage="profile"><span>01</span> 入場</li><li data-stage="suspects"><span>02</span> 認識團隊</li><li data-stage="investigation"><span>03</span> 調查事件</li><li data-stage="dossier"><span>04</span> 推理投票</li></ol>
+    </nav>
     <main id="app" class="app-shell" aria-live="polite">
       <section id="screen-intro" class="screen active intro-screen" data-screen="intro">
-        <div class="eyebrow"><span class="live-dot"></span> INCIDENT #404／連線中</div>
+        <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> 校園懸疑檔案 01</div>
         <div class="hero-lockup">
           <p class="kicker">AI 資安劇本殺 × 狼人殺</p>
-          <h1 data-text="零信任">零信任</h1>
-          <p class="hero-subtitle">有人正在利用 AI，偷走你們的提案。</p>
+          <h1>零信任<span>提案消失的<br />那一晚。</span></h1>
+          <p class="hero-subtitle">熟悉的隊友，陌生的秘密。<br />有人正在利用 AI，偷走你們的提案。</p>
         </div>
         <div class="brief-card glass-card">
           <div class="brief-icon" aria-hidden="true">
@@ -42,12 +46,24 @@
           </div>
         </div>
         <div class="intro-meta">
-          <span>單人可玩</span><span>約 8 分鐘</span><span>可重玩</span>
+          <span>1 人就能玩</span><span>約 8 分鐘</span><span>4 起事件</span>
         </div>
         <button id="startBtn" class="primary-button pulse" type="button">
-          <span>進入事件現場</span><span aria-hidden="true">→</span>
+          <span>開始我的調查</span><span aria-hidden="true">↗</span>
         </button>
         <p class="microcopy">沒有資安背景也能玩。所有人物與事件均為虛構。</p>
+        </div>
+        <div class="cast-board" aria-label="團隊角色插畫">
+          <div class="board-note">誰，是你可以相信的人？<span aria-hidden="true">↘</span></div>
+          <div class="cast-grid">
+            <figure class="cast-photo cast-mia"><div class="portrait avatar-mia" role="img" aria-label="米亞的校園動畫肖像"></div><figcaption><b>MIA</b><span>社群企劃・米亞</span></figcaption></figure>
+            <figure class="cast-photo cast-jun"><div class="portrait avatar-jun" role="img" aria-label="以駿的校園動畫肖像"></div><figcaption><b>JUN</b><span>前端工程・以駿</span></figcaption></figure>
+            <figure class="cast-photo cast-nina"><div class="portrait avatar-nina" role="img" aria-label="昕霓的校園動畫肖像"></div><figcaption><b>NINA</b><span>使用者研究・昕霓</span></figcaption></figure>
+            <figure class="cast-photo cast-echo"><div class="portrait avatar-echo" role="img" aria-label="EchoWolf 的動畫機器人肖像"></div><figcaption><b>ECHO</b><span>AI 效率助理</span></figcaption></figure>
+          </div>
+          <div class="board-sticker">提案截止前 20 分鐘<br /><b>調查，現在開始！</b></div>
+        </div>
+        <div class="intro-route" aria-label="玩法簡介"><div><span>01</span><b>認識隊友</b><small>讀懂四份角色檔案</small></div><div><span>02</span><b>找到線索</b><small>調查 AI 造成的異常</small></div><div><span>03</span><b>投出狼人</b><small>用證據拼出真相</small></div></div>
       </section>
 
       <section id="screen-profile" class="screen" data-screen="profile">
@@ -60,7 +76,7 @@
           <label for="codename">調查員代號</label>
           <div class="input-wrap">
             <span>&gt;</span>
-            <input id="codename" name="codename" maxlength="12" autocomplete="off" placeholder="例如：MELODY_27" required />
+            <input id="codename" name="codename" maxlength="12" autocomplete="off" placeholder="例如：小予、MELODY" required />
           </div>
           <fieldset>
             <legend>選擇專長</legend>
@@ -112,8 +128,8 @@
 
       <section id="screen-suspects" class="screen wide-screen" data-screen="suspects">
         <div class="section-heading compact-heading">
-          <span class="step-code">02／角色掃描</span>
-          <h2>四名嫌疑人已上線</h2>
+          <span class="step-code">02／團隊檔案</span>
+          <h2>熟悉的隊友，藏著什麼秘密？</h2>
           <p>每個人都有動機，也都碰過團隊資料。</p>
         </div>
         <div id="suspectGrid" class="suspect-grid"></div>
@@ -197,7 +213,7 @@
         <h2 id="endingTitle"></h2>
         <p id="endingSubtitle" class="ending-subtitle"></p>
         <div class="wolf-reveal glass-card">
-          <div class="avatar avatar-echo avatar-large"><span>EW</span></div>
+          <div class="avatar avatar-echo avatar-large" role="img" aria-label="EchoWolf 動畫機器人肖像"></div>
           <div>
             <span class="role-tag danger">資料狼人</span>
             <h3>EchoWolf 外掛機器人</h3>
@@ -232,6 +248,7 @@
         <p class="microcopy">本遊戲以情境判斷取代背誦；真實事件請立即通知組織資安窗口並保留紀錄。</p>
       </section>
     </main>
+    <footer class="site-footer"><span>HACKSON · CTRL · CREATE</span><span>先停一下，再相信。<span aria-hidden="true"> ✳</span></span></footer>
 
     <dialog id="suspectDialog" class="suspect-dialog">
       <button id="closeDialog" class="dialog-close" type="button" aria-label="關閉">×</button>
