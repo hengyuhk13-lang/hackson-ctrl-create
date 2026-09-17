@@ -169,7 +169,8 @@ const literacyItems = [
 ];
 
 const state = {
-  screen: "intro",
+  screen: "portal",
+  lastGameScreen: "intro",
   codename: "",
   skill: "觀察者",
   round: 0,
@@ -186,8 +187,13 @@ const $$ = (selector) => [...document.querySelectorAll(selector)];
 function showScreen(name) {
   $$('.screen').forEach((screen) => screen.classList.toggle('active', screen.dataset.screen === name));
   state.screen = name;
-  $('#restartTop').classList.toggle('hidden', ['intro', 'profile'].includes(name));
-  $('#stageNav').classList.toggle('hidden', name === 'intro');
+  const isGame = ['intro', 'profile', 'briefing', 'suspects', 'investigation', 'dossier', 'ending'].includes(name);
+  if (isGame) state.lastGameScreen = name;
+  $('#soundToggle').classList.toggle('hidden', !isGame);
+  $('#restartTop').classList.toggle('hidden', !isGame || ['intro', 'profile'].includes(name));
+  $('#gameHomeBtn').classList.toggle('hidden', name === 'portal');
+  $('#stageNav').classList.toggle('hidden', !isGame || name === 'intro');
+  $('#portalGameBtn').textContent = state.lastGameScreen === 'intro' ? '開啟資安遊戲' : '繼續我的調查';
   const stage = ({ briefing: 'profile', ending: 'dossier' })[name] || name;
   $$('#stageNav li').forEach(item => {
     const current = item.dataset.stage === stage;
@@ -196,7 +202,7 @@ function showScreen(name) {
     else item.removeAttribute('aria-current');
   });
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  document.title = `${name === 'intro' ? '零信任' : screenTitle(name)}｜AI 資安劇本殺`;
+  document.title = isGame ? `${name === 'intro' ? '零信任' : screenTitle(name)}｜竹青 AI 領航盾` : `${({portal: '竹青 AI 領航盾', checklist: 'AI 工具風險檢核', faq: '常見問題'})[name] || '竹青 AI 領航盾'}｜CTRL+CREATE 提案原型`;
 }
 
 function screenTitle(name) {
@@ -357,7 +363,7 @@ function renderEnding() {
 }
 
 function resetGame() {
-  Object.assign(state, { screen: 'intro', codename: '', skill: '觀察者', round: 0, score: 50, clues: [], answers: [], vote: null });
+  Object.assign(state, { screen: 'intro', lastGameScreen: 'intro', codename: '', skill: '觀察者', round: 0, score: 50, clues: [], answers: [], vote: null });
   $('#codename').value = '';
   $('input[name="skill"][value="觀察者"]').checked = true;
   showScreen('intro');
@@ -416,4 +422,4 @@ $('#copyResultBtn').addEventListener('click', async () => {
   }
 });
 
-showScreen('intro');
+showScreen('portal');

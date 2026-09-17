@@ -4,18 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#faf7ef" />
-    <meta name="description" content="一局真正能玩的 AI 資安劇本殺 × 狼人殺，從生活化事件學會安全使用 AI 工具。" />
-    <title>零信任：AI 資安劇本殺</title>
-    <link rel="stylesheet" href="./campus.css?v=faceless-1" />
+    <meta name="description" content="竹青 AI 領航盾：青年數位工具服務提案原型，整合 AI 風險檢核與可互動的資安推理遊戲。非市府官方服務。" />
+    <title>竹青 AI 領航盾｜CTRL+CREATE 提案原型</title>
+    <link rel="stylesheet" href="./campus.css?v=portal-1" />
+    <link rel="stylesheet" href="./services.css?v=portal-1" />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
     <header class="topbar">
-      <a class="brand" href="#" aria-label="回到遊戲首頁">
-        <span class="brand-mark">Z.</span>
-        <span>零信任<span class="brand-cn">校園推理俱樂部</span></span>
+      <a id="homeLink" class="brand" href="#portal" aria-label="回到竹青 AI 領航盾服務首頁">
+        <span class="brand-mark">竹.</span>
+        <span>竹青 AI 領航盾<span class="brand-cn">CTRL+CREATE · 學生提案原型</span></span>
       </a>
       <div class="top-actions">
+        <button id="gameHomeBtn" class="ghost-button hidden" type="button">服務首頁</button>
         <button id="soundToggle" class="icon-button" type="button" aria-pressed="false" title="切換音效">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v6h4l5 4V5L9 9H5Zm12.5 3a4.5 4.5 0 0 0-1.5-3.35v6.7A4.5 4.5 0 0 0 17.5 12Z"/></svg>
           <span class="sr-only">切換音效</span>
@@ -23,12 +25,75 @@
         <button id="restartTop" class="ghost-button hidden" type="button">重新開局</button>
       </div>
     </header>
+    <div class="prototype-banner"><span>非官方服務</span> 互動提案原型，未串接 LINE 或市府補助系統，不受理真實申請。</div>
 
     <nav id="stageNav" class="stage-nav hidden" aria-label="遊戲進度">
       <ol><li data-stage="profile"><span>01</span> 入場</li><li data-stage="suspects"><span>02</span> 認識團隊</li><li data-stage="investigation"><span>03</span> 調查事件</li><li data-stage="dossier"><span>04</span> 推理投票</li></ol>
     </nav>
     <main id="app" class="app-shell" aria-live="polite">
-      <section id="screen-intro" class="screen active intro-screen" data-screen="intro">
+      <section id="screen-portal" class="screen active wide-screen portal-screen" data-screen="portal">
+        <div class="portal-hero">
+          <div class="portal-copy">
+            <div class="eyebrow"><span class="live-dot"></span> 給青年，一個安心使用 AI 的入口</div>
+            <p class="kicker">竹青 AI 領航盾</p>
+            <h1>把 AI 用得順手，<br /><span>也用得安心。</span></h1>
+            <p class="portal-description">從數位工具補助服務，到資安檢核與情境練習，<br class="desktop-break" />讓每一次使用 AI，都多一點安心。</p>
+            <div class="portal-actions"><button id="portalCheckBtn" class="primary-button" type="button">先做 AI 風險檢核 <span aria-hidden="true">↗</span></button><button id="portalGameBtn" class="ghost-button" type="button">開啟資安遊戲</button></div>
+            <p class="portal-caption">現在可體驗：6 項風險自評、單人推理遊戲。不用登入。</p>
+          </div>
+          <div class="portal-notebook" aria-label="服務設計構想：申請時確認風險，透過遊戲練習，再回到日常使用">
+            <div class="notebook-title"><span>MY AI TOOLKIT</span><span aria-hidden="true">✳</span></div>
+            <div class="notebook-note"><small>補助流程 × 安全習慣</small><strong>讓資安成為使用 AI<br />時的一個小動作。</strong></div>
+            <ol class="notebook-path"><li><span>01</span><div><b>準備申請</b><small>構想：連接青年數位工具服務</small></div><i>規劃中</i></li><li><span>02</span><div><b>確認工具風險</b><small>來源、權限、資料與分享</small></div><i class="available">可體驗</i></li><li><span>03</span><div><b>玩一局，練習判斷</b><small>把安全觀念帶回日常</small></div><i class="available">可體驗</i></li></ol>
+            <div class="notebook-stamp">先停一下，再相信。↗</div>
+          </div>
+        </div>
+        <section class="service-section" aria-labelledby="serviceHeading">
+          <div class="portal-section-heading"><div><span class="step-code">ONE ENTRY · 六大服務構想</span><h2 id="serviceHeading">今天，你想先做什麼？</h2></div><p>實作功能與串接規劃，清楚分開。</p></div>
+          <div class="service-grid">
+            <button class="service-tile" type="button" data-demo="identity"><span class="service-icon coral" aria-hidden="true">ID</span><span class="service-status planned">串接規劃</span><h3>身分快綁</h3><p>構想：一次綁定，減少重複填寫。</p><span class="service-link">看功能構想 ↗</span></button>
+            <button class="service-tile" type="button" data-demo="apply"><span class="service-icon blue" aria-hidden="true">＋</span><span class="service-status planned">串接規劃</span><h3>一鍵申請</h3><p>構想：辨識收據，協助整理申請資料。</p><span class="service-link">看功能構想 ↗</span></button>
+            <button class="service-tile" type="button" data-demo="progress"><span class="service-icon sage" aria-hidden="true">→</span><span class="service-status planned">串接規劃</span><h3>查詢進度</h3><p>構想：看懂審核節點，不用反覆詢問。</p><span class="service-link">看功能構想 ↗</span></button>
+            <button class="service-tile" type="button" data-demo="assistant"><span class="service-icon lavender" aria-hidden="true">？</span><span class="service-status planned">串接規劃</span><h3>客服小幫手</h3><p>構想：FAQ 分流，再由智慧助理協助。</p><span class="service-link">看功能構想 ↗</span></button>
+            <button id="portalFaqBtn" class="service-tile" type="button"><span class="service-icon sand" aria-hidden="true">Aa</span><span class="service-status available">可查看</span><h3>FAQ</h3><p>了解這個原型、檢核與遊戲怎麼用。</p><span class="service-link">查看常見問題 ↗</span></button>
+            <button id="portalGameTile" class="service-tile game-service" type="button"><span class="service-icon sage" aria-hidden="true">EW</span><span class="service-status available">可遊玩</span><h3>資安遊戲</h3><p>調查四起異常，揪出團隊的資料狼人。</p><span class="service-link">進入《零信任》 ↗</span></button>
+          </div>
+        </section>
+        <section class="check-entry glass-card" aria-labelledby="checkEntryHeading"><div><span class="step-code">從遊戲，回到你的工具</span><h2 id="checkEntryHeading">在貼上資料之前，先確認六件事。</h2><p>用約 2 分鐘整理風險與下一步；不是工具安全認證，也不影響補助資格。</p></div><button id="portalCheckTile" class="primary-button" type="button">開始風險檢核 ↗</button></section>
+        <p class="portal-boundary">本提案構想以青年官方 LINE 為服務入口；正式上線須取得機關授權並完成 API、個資與審核流程整合。目前頁面沒有 LINE 登入、OCR、RAG 或真實案件資料。</p>
+      </section>
+
+      <section id="screen-checklist" class="screen wide-screen" data-screen="checklist">
+        <div class="section-heading compact-heading"><span class="step-code">AI TOOL CHECK · 使用前的 2 分鐘</span><h2>你的 AI 工具，準備好了嗎？</h2><p>依照你正在使用的設定回答。不清楚也沒關係，我們會把需要確認的地方列出來。</p></div>
+        <div class="check-privacy"><span aria-hidden="true">✳</span><p>不用填姓名、身分證或金鑰。答案只保留在這個分頁的記憶體，不會傳送到伺服器；重新整理就會清除。</p></div>
+        <form id="riskForm" novalidate>
+          <div class="check-toolbar"><label for="riskUseCase">我打算用 AI 來 <select id="riskUseCase" name="useCase"><option value="create">文字／影像創作</option><option value="research">課業／訪談整理</option><option value="work">文件／工作自動化</option></select></label><span id="riskProgress" role="status">已完成 0／6 項</span></div>
+          <div id="riskQuestions" class="risk-question-grid"></div>
+          <p id="riskFormError" class="form-error hidden" role="alert"></p>
+          <div class="check-form-actions"><button class="primary-button" type="submit">整理我的檢核結果 ↗</button><button id="riskResetBtn" class="ghost-button" type="button">清除答案</button></div>
+        </form>
+        <section id="riskReport" class="risk-report glass-card hidden" tabindex="-1" aria-labelledby="riskReportTitle">
+          <div class="risk-report-heading"><span id="riskReportBadge" class="report-badge"></span><h2 id="riskReportTitle"></h2><p id="riskReportSummary"></p></div>
+          <div id="riskReportCounts" class="risk-counts"></div>
+          <h3>接下來，可以先做這些事</h3><div id="riskActionList" class="risk-action-list"></div>
+          <p class="report-disclaimer">這是依你的回答產生的規則式自評，不會掃描工具、驗證設定或判定補助資格。全部確認也不代表零風險；真實事件請保留紀錄並向所屬組織通報。</p>
+          <div class="risk-report-actions"><button id="riskGameBtn" class="primary-button" type="button">用一局遊戲練習判斷 ↗</button><button id="riskCopyBtn" class="ghost-button" type="button">複製檢核摘要</button><button id="riskEditBtn" class="ghost-button" type="button">修改答案</button></div>
+        </section>
+      </section>
+
+      <section id="screen-faq" class="screen" data-screen="faq">
+        <div class="section-heading compact-heading"><span class="step-code">FAQ · 原型使用說明</span><h2>有問題，先看這裡。</h2><p>讓你清楚知道現在能做什麼，以及哪些功能仍在規劃。</p></div>
+        <div class="faq-list">
+          <details class="glass-card"><summary>這是新竹市政府的官方服務嗎？</summary><p>不是。這是 CTRL+CREATE 學生團隊的黑客松互動提案原型，未獲官方服務授權，也沒有串接青年官方 LINE 或市府資料。</p></details>
+          <details class="glass-card"><summary>現在能提交補助申請或查詢真實進度嗎？</summary><p>不能。身分快綁、申請、進度及智慧客服目前只提供功能構想說明；不收取真實收據、身分證或申請資料。資格、金額與申請期限請以主管機關公告為準。</p></details>
+          <details class="glass-card"><summary>風險檢核會認證 AI 工具安全嗎？</summary><p>不會。檢核只依你勾選的答案整理需要確認或調整的地方，沒有掃描、測試或自動比對工具。結果不是官方審核，也不影響補助資格。</p></details>
+          <details class="glass-card"><summary>遊戲需要多人連線或 AI 帳號嗎？</summary><p>不用。現有《零信任》是約 8 分鐘的單人劇情遊戲；人物與事件都是虛構。劇情以 AI 風險為題材，沒有呼叫即時 AI，也沒有多人連線功能。</p></details>
+          <details class="glass-card"><summary>答案與遊戲紀錄會被保存嗎？</summary><p>本原型不會將答案與代號送往伺服器，也沒有分析追蹤程式。頁面開著時可以返回首頁，再繼續遊戲；重新整理或關閉分頁後，紀錄就會清除。</p></details>
+        </div>
+        <button id="faqCheckBtn" class="primary-button" type="button">開始 AI 風險檢核 ↗</button>
+      </section>
+
+      <section id="screen-intro" class="screen intro-screen" data-screen="intro">
         <div class="hero-copy">
         <div class="eyebrow"><span class="live-dot"></span> 校園懸疑檔案 01</div>
         <div class="hero-lockup">
@@ -245,6 +310,7 @@
           <button id="playAgainBtn" class="primary-button" type="button">重新開局</button>
           <button id="copyResultBtn" class="ghost-button" type="button">複製戰績</button>
         </div>
+        <button id="gameFinishedCheckBtn" class="ghost-button game-to-check" type="button">把觀念帶回我的 AI 工具：開始風險檢核 ↗</button>
         <p class="microcopy">本遊戲以情境判斷取代背誦；真實事件請立即通知組織資安窗口並保留紀錄。</p>
       </section>
     </main>
@@ -254,8 +320,13 @@
       <button id="closeDialog" class="dialog-close" type="button" aria-label="關閉">×</button>
       <div id="dialogContent"></div>
     </dialog>
+    <dialog id="serviceDialog" class="suspect-dialog service-dialog" aria-labelledby="serviceDialogTitle">
+      <button id="closeServiceDialog" class="dialog-close" type="button" aria-label="關閉功能構想">×</button>
+      <div class="service-dialog-content"><span class="service-status planned">功能構想 · 尚未串接</span><h2 id="serviceDialogTitle"></h2><p id="serviceDialogDescription"></p><div class="demo-boundary">此處不會登入 LINE、驗證身分、提交申請或取得任何真實案件資料。</div><button id="serviceDialogCheckBtn" class="primary-button" type="button">先體驗 AI 風險檢核 ↗</button></div>
+    </dialog>
 
     <div id="toast" class="toast" role="status"></div>
-    <script src="./app.js?v=faceless-1"></script>
+    <script src="./app.js?v=portal-1"></script>
+    <script src="./services.js?v=portal-1"></script>
   </body>
 </html>
