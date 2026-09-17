@@ -74,11 +74,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .primary-button:hover, .danger-button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 0 #234132; background: #294d3c; }
 .primary-button:active, .danger-button:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 #234132; }
 .microcopy { color: var(--muted); font-size: 10px; line-height: 1.8; text-align: center; margin-top: 16px; }
-.portrait, .avatar { background-image: url('./portraits.webp'); background-size: 200% 200%; background-repeat: no-repeat; background-color: #f4eee3; }
-.avatar-mia { background-position: 0 0; --accent: #c46650; }
-.avatar-jun { background-position: 100% 0; --accent: #497a96; }
-.avatar-nina { background-position: 0 100%; --accent: #497b60; }
-.avatar-echo { background-position: 100% 100%; --accent: #837094; }
+.portrait, .avatar { position: relative; display: grid; place-items: center; color: var(--accent); background: var(--avatar-paper); border: 1px solid color-mix(in srgb, var(--accent) 16%, transparent); isolation: isolate; }
+.portrait::before, .avatar::before { content: ""; position: absolute; inset: 12%; border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent); border-radius: 15px 5px 15px 5px; transform: rotate(-5deg); z-index: -1; }
+.portrait > span, .avatar > span { font: 800 28px ui-monospace, monospace; letter-spacing: -.07em; }
+.portrait > span { font-size: clamp(42px, 5vw, 66px); }
+.avatar-mia { --accent: #a34e3a; --avatar-paper: #f4dfd5; }
+.avatar-jun { --accent: #3c6781; --avatar-paper: #dce8ed; }
+.avatar-nina { --accent: #43684d; --avatar-paper: #e0e8d6; }
+.avatar-echo { --accent: #766083; --avatar-paper: #e8e0ee; }
 .cast-board { position: relative; padding: 23px 17px 37px; background-image: linear-gradient(#a6ac9520 1px, transparent 1px), linear-gradient(90deg,#a6ac9520 1px, transparent 1px); background-size: 24px 24px; border-radius: 35px; background-color: #eeeee1; }
 .board-note { display: flex; justify-content: center; align-items: center; gap: 12px; font-size: 14px; color: var(--green); font-weight: 700; margin: 0 0 14px; letter-spacing: .04em; }
 .board-note > span { font-size: 27px; }
@@ -140,7 +143,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .suspect-card:hover { transform: translateY(-5px) rotate(-1deg); border-color: var(--accent); }
 .suspect-number { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 9px; letter-spacing: .05em; color: var(--muted); }
 .suspect-number > span { padding: 3px 5px; border-radius: 3px; background: var(--sage); color: var(--green); }
-.avatar { display: block; width: 80px; height: 80px; border-radius: 12px; flex-shrink: 0; }
+.avatar { width: 80px; height: 80px; border-radius: 12px; flex-shrink: 0; }
+.suspect-card .avatar > span { font-size: 48px; }
 .suspect-card .avatar { width: 100%; height: auto; aspect-ratio: 1; border-radius: 3px; margin: 0 0 18px; }
 .suspect-card h3 { font-size: 16px; margin: 0; }
 .suspect-card .role { font-size: 11px; font-weight: 800; color: var(--accent); margin: 6px 0 15px; }
@@ -243,6 +247,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .vote-option { position: relative; }
 .vote-option > span { display: flex; gap: 13px; align-items: center; background: var(--paper); border: 1px solid #e4d9cd; border-radius: 11px; padding: 10px 12px; cursor: pointer; }
 .vote-option .avatar { width: 52px; height: 52px; border-radius: 7px; }
+.vote-option .avatar > span { font-size: 18px; }
+.vote-option .avatar::before { inset: 8px; border-radius: 7px; }
 .vote-person { flex: 1; }
 .vote-person b { display: block; font-size: 13px; }
 .vote-person small { display: block; margin-top: 5px; color: var(--muted); font-size: 10px; }
