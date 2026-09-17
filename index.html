@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B1020" />
+    <meta name="description" content="一局真正能玩的 AI 資安劇本殺 × 狼人殺，從生活化事件學會安全使用 AI 工具。" />
+    <title>零信任：AI 資安劇本殺</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="回到遊戲首頁">
+        <span class="brand-mark">Z</span>
+        <span>ZERO TRUST<span class="brand-cn">／零信任</span></span>
+      </a>
+      <div class="top-actions">
+        <button id="soundToggle" class="icon-button" type="button" aria-pressed="false" title="切換音效">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v6h4l5 4V5L9 9H5Zm12.5 3a4.5 4.5 0 0 0-1.5-3.35v6.7A4.5 4.5 0 0 0 17.5 12Z"/></svg>
+          <span class="sr-only">切換音效</span>
+        </button>
+        <button id="restartTop" class="ghost-button hidden" type="button">重新開局</button>
+      </div>
+    </header>
+
+    <main id="app" class="app-shell" aria-live="polite">
+      <section id="screen-intro" class="screen active intro-screen" data-screen="intro">
+        <div class="eyebrow"><span class="live-dot"></span> INCIDENT #404／連線中</div>
+        <div class="hero-lockup">
+          <p class="kicker">AI 資安劇本殺 × 狼人殺</p>
+          <h1 data-text="零信任">零信任</h1>
+          <p class="hero-subtitle">有人正在利用 AI，偷走你們的提案。</p>
+        </div>
+        <div class="brief-card glass-card">
+          <div class="brief-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2 3.5 5.5V11c0 5.2 3.6 9.9 8.5 11 4.9-1.1 8.5-5.8 8.5-11V5.5L12 2Zm0 4.2 4.5 1.85V11c0 3.2-1.9 6.2-4.5 7.2-2.6-1-4.5-4-4.5-7.2V8.05L12 6.2Z"/></svg>
+          </div>
+          <div>
+            <strong>你的任務</strong>
+            <p>調查 4 起生活化 AI 資安事件，蒐集線索，在截止前找出藏在團隊裡的「資料狼人」。</p>
+          </div>
+        </div>
+        <div class="intro-meta">
+          <span>單人可玩</span><span>約 8 分鐘</span><span>可重玩</span>
+        </div>
+        <button id="startBtn" class="primary-button pulse" type="button">
+          <span>進入事件現場</span><span aria-hidden="true">→</span>
+        </button>
+        <p class="microcopy">沒有資安背景也能玩。所有人物與事件均為虛構。</p>
+      </section>
+
+      <section id="screen-profile" class="screen" data-screen="profile">
+        <div class="section-heading">
+          <span class="step-code">00／身份建檔</span>
+          <h2>建立你的調查員代號</h2>
+          <p>這個代號會出現在任務紀錄裡。</p>
+        </div>
+        <form id="profileForm" class="glass-card form-card">
+          <label for="codename">調查員代號</label>
+          <div class="input-wrap">
+            <span>&gt;</span>
+            <input id="codename" name="codename" maxlength="12" autocomplete="off" placeholder="例如：MELODY_27" required />
+          </div>
+          <fieldset>
+            <legend>選擇專長</legend>
+            <div class="skill-grid">
+              <label class="choice-chip">
+                <input type="radio" name="skill" value="觀察者" checked />
+                <span><b>觀察者</b><small>線索提示更明確</small></span>
+              </label>
+              <label class="choice-chip">
+                <input type="radio" name="skill" value="驗證者" />
+                <span><b>驗證者</b><small>風險回饋更完整</small></span>
+              </label>
+              <label class="choice-chip">
+                <input type="radio" name="skill" value="守門員" />
+                <span><b>守門員</b><small>初始防線 +10</small></span>
+              </label>
+            </div>
+          </fieldset>
+          <button class="primary-button" type="submit">建立身份</button>
+        </form>
+      </section>
+
+      <section id="screen-briefing" class="screen" data-screen="briefing">
+        <div class="mission-head">
+          <div>
+            <span class="step-code">01／任務簡報</span>
+            <h2>提案外洩倒數</h2>
+          </div>
+          <span class="countdown-chip">23:40</span>
+        </div>
+        <article class="glass-card story-card">
+          <div class="story-timestamp">今天・提案截止前 20 分鐘</div>
+          <p>你們正在準備青年 AI 資安黑客松決選。團隊把訪談逐字稿、企劃與簡報集中在共享雲端，並同時使用多款 AI 工具。</p>
+          <p>突然，尚未公開的提案內容出現在匿名論壇。系統紀錄顯示：<em>外洩不是單一失誤，而是一連串刻意引導。</em></p>
+          <div class="alert-strip">
+            <span>!</span>
+            <p><strong>資料狼人已滲透群組。</strong><br />它可能是人，也可能藏在某個看似無害的 AI 服務裡。</p>
+          </div>
+        </article>
+        <div class="role-reveal glass-card">
+          <div class="role-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="kicker">你的隱藏身份</p>
+          <h3>零信任調查員</h3>
+          <p>你不預設任何人或工具可信。每次授權、輸入與輸出，都要先驗證再行動。</p>
+          <div class="role-ability"><span>被動技能</span>完成判斷後，立即取得風險解析</div>
+        </div>
+        <button id="meetTeamBtn" class="primary-button" type="button">查看嫌疑人檔案</button>
+      </section>
+
+      <section id="screen-suspects" class="screen wide-screen" data-screen="suspects">
+        <div class="section-heading compact-heading">
+          <span class="step-code">02／角色掃描</span>
+          <h2>四名嫌疑人已上線</h2>
+          <p>每個人都有動機，也都碰過團隊資料。</p>
+        </div>
+        <div id="suspectGrid" class="suspect-grid"></div>
+        <div class="tip-line"><span>TIP</span> 點擊角色卡可查看完整檔案。</div>
+        <button id="beginInvestigationBtn" class="primary-button" type="button">開始第一回合</button>
+      </section>
+
+      <section id="screen-investigation" class="screen wide-screen" data-screen="investigation">
+        <div class="hud">
+          <div class="hud-progress">
+            <span id="roundLabel">ROUND 1／4</span>
+            <div class="progress-track"><span id="progressFill"></span></div>
+          </div>
+          <div class="hud-stats">
+            <span class="stat-chip">防線 <b id="defenseScore">50</b></span>
+            <span class="stat-chip">線索 <b id="clueCount">0</b></span>
+          </div>
+        </div>
+
+        <article id="eventCard" class="event-card glass-card">
+          <div class="event-topline">
+            <span id="eventTime" class="step-code"></span>
+            <span id="eventChannel" class="channel-chip"></span>
+          </div>
+          <h2 id="eventTitle"></h2>
+          <p id="eventDesc" class="event-desc"></p>
+          <div id="artifact" class="artifact"></div>
+        </article>
+
+        <section id="decisionPanel" class="decision-panel">
+          <div class="decision-heading">
+            <div>
+              <span class="step-code">風險判斷</span>
+              <h3 id="decisionQuestion"></h3>
+            </div>
+            <span class="single-choice">單選</span>
+          </div>
+          <div id="optionList" class="option-list"></div>
+        </section>
+
+        <section id="feedbackPanel" class="feedback-panel glass-card hidden" tabindex="-1">
+          <div class="feedback-status">
+            <span id="feedbackIcon"></span>
+            <div><small>判斷結果</small><h3 id="feedbackTitle"></h3></div>
+            <b id="scoreDelta"></b>
+          </div>
+          <p id="feedbackText"></p>
+          <div class="literacy-tag"><span>素養解鎖</span><b id="literacyName"></b></div>
+          <div id="clueUnlock" class="clue-unlock">
+            <span class="clue-number">NEW CLUE</span>
+            <div><b id="clueTitle"></b><p id="clueText"></p></div>
+          </div>
+          <button id="nextRoundBtn" class="primary-button" type="button">前往下一回合</button>
+        </section>
+      </section>
+
+      <section id="screen-dossier" class="screen wide-screen" data-screen="dossier">
+        <div class="section-heading compact-heading">
+          <span class="step-code">07／最終推理</span>
+          <h2>線索牆已完成</h2>
+          <p><span id="dossierName"></span>，檢查證據後投出你認為的資料狼人。</p>
+        </div>
+        <div class="dossier-layout">
+          <div class="clue-board glass-card">
+            <div class="board-title"><span>已取得證據</span><b id="boardClueCount"></b></div>
+            <div id="clueBoard" class="clue-board-list"></div>
+          </div>
+          <div class="vote-panel">
+            <div class="vote-header"><span class="live-dot red"></span> 匿名投票開啟</div>
+            <h3>誰在操控外洩？</h3>
+            <p>角色會說謊，但裝置紀錄不會。</p>
+            <div id="voteList" class="vote-list"></div>
+            <button id="voteBtn" class="danger-button" type="button" disabled>鎖定並揭曉身份</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-ending" class="screen" data-screen="ending">
+        <div id="endingBadge" class="ending-badge"></div>
+        <p class="kicker">CASE CLOSED／事件結案</p>
+        <h2 id="endingTitle"></h2>
+        <p id="endingSubtitle" class="ending-subtitle"></p>
+        <div class="wolf-reveal glass-card">
+          <div class="avatar avatar-echo avatar-large"><span>EW</span></div>
+          <div>
+            <span class="role-tag danger">資料狼人</span>
+            <h3>EchoWolf 外掛機器人</h3>
+            <p>它偽裝成團隊效率工具，利用過度授權、提示注入與偽造語音，逐步取得資料。</p>
+          </div>
+        </div>
+        <div class="result-grid">
+          <div class="score-card glass-card"><small>資安防線</small><strong id="finalScore"></strong><span id="scoreRank"></span></div>
+          <div class="score-card glass-card"><small>有效線索</small><strong id="finalClues"></strong><span>共 4 枚</span></div>
+          <div class="score-card glass-card"><small>狼人投票</small><strong id="voteResult"></strong><span id="voteTargetLabel"></span></div>
+        </div>
+        <section class="debrief glass-card">
+          <div class="debrief-head">
+            <div><span class="step-code">你的 AI 資安雷達</span><h3>五個可以立刻帶走的習慣</h3></div>
+            <span id="radarPercent" class="radar-percent"></span>
+          </div>
+          <div id="literacyList" class="literacy-list"></div>
+        </section>
+        <details class="truth-details glass-card">
+          <summary>查看完整犯案手法</summary>
+          <ol>
+            <li><b>假邀請：</b>用相似網域誘導成員授權整個雲端。</li>
+            <li><b>提示注入：</b>把惡意指令藏進外部文件，讓 AI 代理誤把機密送出。</li>
+            <li><b>AI 語音：</b>仿冒老師聲音，要求成員貼出 API 金鑰。</li>
+            <li><b>公開連結：</b>誘導團隊用「知道連結即可查看」，擴大資料暴露。</li>
+          </ol>
+        </details>
+        <div class="ending-actions">
+          <button id="playAgainBtn" class="primary-button" type="button">重新開局</button>
+          <button id="copyResultBtn" class="ghost-button" type="button">複製戰績</button>
+        </div>
+        <p class="microcopy">本遊戲以情境判斷取代背誦；真實事件請立即通知組織資安窗口並保留紀錄。</p>
+      </section>
+    </main>
+
+    <dialog id="suspectDialog" class="suspect-dialog">
+      <button id="closeDialog" class="dialog-close" type="button" aria-label="關閉">×</button>
+      <div id="dialogContent"></div>
+    </dialog>
+
+    <div id="toast" class="toast" role="status"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
