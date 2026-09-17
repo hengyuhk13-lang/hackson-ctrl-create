@@ -305,6 +305,8 @@ function answerRound(choice) {
 }
 
 function renderDossier() {
+  state.vote = null;
+  $('#voteBtn').disabled = true;
   $('#dossierName').textContent = state.codename;
   $('#boardClueCount').textContent = `${state.clues.length}／4`;
   $('#clueBoard').innerHTML = state.clues.map((clue, index) => `
