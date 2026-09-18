@@ -1,0 +1,15 @@
+{
+  "name": "ai-cyber-mystery-mvp",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "mkdir -p dist && cp src/index.html src/campus.css src/app.js src/simulation.html src/simulation.css src/simulation-engine.js src/simulation.js src/multiplayer.html src/multiplayer.js dist/",
+    "test": "npm run build && node tests/dom-flow.cjs && node tests/simulation.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.116.0"
+  }
+}
